@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Media Center</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700&family=Fredoka:wght@600;700&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="loader-container">
+            <img id="splash-cat-gif" src="" alt="Cat GIF" class="splash-cat-gif">
+            <p id="splash-status">Scanning your library...</p>
+            <div class="splash-progress-bg">
+                <div id="splash-progress-fill" class="splash-progress-fill"></div>
+            </div>
+            <p id="splash-percent">0%</p>
+        </div>
+    </div>
+
+    <!-- Main Navigation UI -->
+    <div id="app-container" class="hidden">
+        <header class="navbar">
+            <div class="nav-left">
+                <div class="logo-sprite nav-logo"></div>
+                <nav id="breadcrumbs" class="breadcrumbs">
+                    <!-- Home / Show / Season -->
+                </nav>
+            </div>
+            <div class="nav-right">
+                <button id="exit-btn" class="btn-icon-custom" title="Exit to Desktop" data-icon="power"></button>
+                <button id="settings-btn" class="btn-icon-custom" title="Settings" data-icon="settings"></button>
+                <button id="back-btn" class="btn-icon-custom hidden" title="Go Back" data-icon="back"></button>
+            </div>
+        </header>
+
+        <main class="content">
+            <h2 id="current-folder-title" class="section-title">All Shows</h2>
+            <div id="item-grid" class="video-grid">
+                <!-- Folders and Videos will be injected here -->
+            </div>
+
+            <!-- Apps Section -->
+            <div id="apps-section" class="apps-section">
+                <button id="youtube-btn" class="app-card" data-icon="youtube">
+                    <span class="app-name">YouTube TV</span>
+                </button>
+            </div>
+        </main>
+
+        <!-- Settings Overlay -->
+        <div id="settings-overlay" class="player-overlay hidden">
+            <div class="settings-container">
+                <h2 class="settings-title">Settings</h2>
+                <div class="settings-list">
+                    <div class="setting-item" data-setting="subtitles_enabled">
+                        <div class="setting-info">
+                            <span class="setting-label">Subtitles</span>
+                            <span class="setting-desc">Enable subtitles by default in VLC</span>
+                        </div>
+                        <div class="checkbox" id="check-subtitles"></div>
+                    </div>
+                    <div class="setting-item" data-setting="autostart">
+                        <div class="setting-info">
+                            <span class="setting-label">Open on Startup</span>
+                            <span class="setting-desc">Automatically launch Media Center on boot</span>
+                        </div>
+                        <div class="checkbox" id="check-autostart"></div>
+                    </div>
+                    <div class="setting-item" data-setting="music_enabled">
+                        <div class="setting-info">
+                            <span class="setting-label">Background Music</span>
+                            <span class="setting-desc">Play Temmie music in the UI</span>
+                        </div>
+                        <div class="checkbox" id="check-music"></div>
+                    </div>
+                </div>
+                <button id="close-settings" class="btn" style="margin-top: 40px; width: 100%;">Close & Save</button>
+            </div>
+        </div>
+
+        <audio id="bg-music" loop>
+            <source src="/static/assets/music.ogg" type="audio/ogg">
+            <source src="/static/assets/music.mp3" type="audio/mpeg">
+        </audio>
+
+        <audio id="snd-nav" src="/static/assets/common2.wav"></audio>
+        <audio id="snd-select" src="/static/assets/common3.wav"></audio>
+        <audio id="snd-back" src="/static/assets/common4.wav"></audio>
+
+        <!-- Playback Overlay (Internal message only) -->
+        <div id="player-overlay" class="player-overlay hidden">
+            <div class="vlc-msg-container">
+                <span class="material-symbols-rounded"
+                    style="font-size: 80px; color: var(--primary-color);">play_circle</span>
+                <div class="vlc-text">Playing in VLC</div>
+                <div class="vlc-subtext">Use VLC's controls to Skip, Change Subtitles, or Close</div>
+                <button id="close-player" class="btn" style="margin-top: 30px;">Back to Menu</button>
+            </div>
+        </div>
+
+        <!-- Autoplay Countdown Overlay -->
+        <div id="autoplay-overlay" class="player-overlay hidden">
+            <div class="vlc-msg-container">
+                <div class="vlc-subtext">Up Next...</div>
+                <div id="next-episode-title" class="vlc-text">Next Episode Title</div>
+
+                <div class="countdown-circle">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" class="prog-bg"></circle>
+                        <circle cx="50" cy="50" r="45" id="countdown-progress" class="prog-fill"></circle>
+                    </svg>
+                    <div id="countdown-number" class="countdown-number">10</div>
+                </div>
+
+                <div class="btn-group">
+                    <button id="autoplay-play-now" class="btn">Play Now</button>
+                    <button id="autoplay-cancel" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <!-- Cat GIF Viewing Window -->
+        <div id="cat-gif-window" class="cat-gif-window">
+            <div class="cat-gif-header">
+                <span class="cat-gif-title">CAT GIFs</span>
+            </div>
+            <div class="cat-gif-content">
+                <img id="current-cat-gif" src="" alt="Cat GIF">
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

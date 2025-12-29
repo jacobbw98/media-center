@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Local Media Center
+Comment=Start local media player in Kiosk mode
+Exec=/home/rpi/.gemini/antigravity/scratch/media-center/start.sh
+X-GNOME-Autostart-enabled=true
+Terminal=false

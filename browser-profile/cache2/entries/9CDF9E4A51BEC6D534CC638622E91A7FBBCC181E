@@ -1,0 +1,453 @@
+diff name:ublock-annoyances lines:3 checksum:65fb91d3bc
+d4 1
+a4 1
+! Diff-Path: ../patches/2025.12.29.411.patch#ublock-annoyances
+diff name:ublock-badware lines:3 checksum:96746aa2db
+d4 1
+a4 1
+! Diff-Path: ../patches/2025.12.29.411.patch#ublock-badware
+diff name:ublock-experimental lines:3 checksum:a95b379550
+d4 1
+a4 1
+! Diff-Path: ../patches/2025.12.29.411.patch#ublock-experimental
+diff name:ublock-filters lines:28 checksum:d7f5febc63
+d3 2
+a4 2
+! Last modified: Mon, 29 Dec 2025 05:25:54 +0000
+! Diff-Path: ../patches/2025.12.29.411.patch#ublock-filters
+d9723 3
+a9725 1
+||html-load.com^$script,xhr,domain=acedarspoon.com|addapinch.com|amandascookin.com|aprettylifeinthesuburbs.com|averiecooks.com|awellstyledlife.com|backforseconds.com|bakedbree.com|bakedbyrachel.com|bakeitwithlove.com|barbarabakes.com|brighteyedbaker.com|browneyedbaker.com|butterbeready.com|cookieandkate.com|cookincanuck.com|cookingclassy.com|creative-culinary.com|crunchycreamysweet.com|culinaryhill.com|damndelicious.net|extrapetite.com|feastingathome.com|feedmephoebe.com|feelgoodfoodie.net|foodfaithfitness.com|forkknifeswoon.com|foxeslovelemons.com|foxyfolksy.com|framedcooks.com|fromvalerieskitchen.com|galonamission.com|gearpatrol.com|godairyfree.org|happyveggiekitchen.com|healthyfitnessmeals.com|healthylittlefoodies.com|homemadehome.com|hoosierhomemade.com|howsweeteats.com|hummingbirdhigh.com|hummusapien.com|hungrypaprikas.com|iamhomesteader.com|ibreatheimhungry.com|inspiralized.com|isabeleats.com|jocooks.com|juliasalbum.com|juliescafebakery.com|justonecookbook.com|kimscravings.com|kirbiecravings.com|laurafuentes.com|littlehouseliving.com|littlesunnykitchen.com|makeitdairyfree.com|makingthymeforhealth.com|medievalists.net|melskitchencafe.com|mexicanfoodjournal.com|minimalistbaker.com|momsdish.com|mountainmamacooks.com|mybakingaddiction.com|mycolombianrecipes.com|natashaskitchen.com|neighborfoodblog.com|newlifeonahomestead.com|nocrumbsleft.net|nomnompaleo.com|nourishedbynic.com|ohsheglows.com|pancakerecipes.com|pinchofyum.com|platingsandpairings.com|premeditatedleftovers.com|pumpkinnspice.com|redcurrantbakery.com|runningonrealfood.com|runningtothekitchen.com|seededatthetable.com|shakentogetherlife.com|shugarysweets.com|simplywhisked.com|skinnytaste.com|studyfinds.org|stylegirlfriend.com|tasteandtellblog.com|the-girl-who-ate-everything.com|thebakermama.com|theendlessmeal.com|thefitchen.com|thefoodieaffair.com|themediterraneandish.com|theplantbasedschool.com|therecipecritic.com|thewanderlustkitchen.com|thewoksoflife.com|umamigirl.com|unefemme.net|wellnessbykay.com|wellplated.com|whatjewwannaeat.com|workweeklunch.com|yorkshirepost.co.uk|yourhomebasedmom.com
+d9727 2
+a9728 2
+acedarspoon.com,addapinch.com,amandascookin.com,aprettylifeinthesuburbs.com,averiecooks.com,awellstyledlife.com,backforseconds.com,bakedbree.com,bakedbyrachel.com,bakeitwithlove.com,barbarabakes.com,brighteyedbaker.com,browneyedbaker.com,butterbeready.com,cookieandkate.com,cookincanuck.com,cookingclassy.com,creative-culinary.com,crunchycreamysweet.com,culinaryhill.com,damndelicious.net,extrapetite.com,feastingathome.com,feedmephoebe.com,feelgoodfoodie.net,foodfaithfitness.com,forkknifeswoon.com,foxeslovelemons.com,foxyfolksy.com,framedcooks.com,fromvalerieskitchen.com,galonamission.com,gearpatrol.com,godairyfree.org,happyveggiekitchen.com,healthyfitnessmeals.com,healthylittlefoodies.com,homemadehome.com,hoosierhomemade.com,howsweeteats.com,hummingbirdhigh.com,hummusapien.com,hungrypaprikas.com,ibreatheimhungry.com,iamhomesteader.com,inspiralized.com,isabeleats.com,jocooks.com,juliasalbum.com,juliescafebakery.com,justonecookbook.com,kimscravings.com,kirbiecravings.com,laurafuentes.com,littlehouseliving.com,littlesunnykitchen.com,makeitdairyfree.com,makingthymeforhealth.com,medievalists.net|melskitchencafe.com,mexicanfoodjournal.com,minimalistbaker.com,momsdish.com,mountainmamacooks.com,mybakingaddiction.com,mycolombianrecipes.com,natashaskitchen.com,neighborfoodblog.com,newlifeonahomestead.com,nocrumbsleft.net,nomnompaleo.com,nourishedbynic.com,ohsheglows.com,pancakerecipes.com,pinchofyum.com,platingsandpairings.com,premeditatedleftovers.com,pumpkinnspice.com,redcurrantbakery.com,runningonrealfood.com,runningtothekitchen.com,seededatthetable.com,shakentogetherlife.com,shugarysweets.com,simplywhisked.com,skinnytaste.com,studyfinds.org,stylegirlfriend.com,tasteandtellblog.com,the-girl-who-ate-everything.com,thebakermama.com,theendlessmeal.com,thefitchen.com,thefoodieaffair.com,themediterraneandish.com,thenewcamera.com,theplantbasedschool.com,therecipecritic.com,thewanderlustkitchen.com,thewoksoflife.com,umamigirl.com,unefemme.net,wellnessbykay.com,wellplated.com,whatjewwannaeat.com,workweeklunch.com,yourhomebasedmom.com##+js(set-cookie, __adblocker, false)
+acedarspoon.com,addapinch.com,amandascookin.com,aprettylifeinthesuburbs.com,averiecooks.com,awellstyledlife.com,backforseconds.com,bakedbree.com,bakedbyrachel.com,bakeitwithlove.com,barbarabakes.com,brighteyedbaker.com,browneyedbaker.com,butterbeready.com,cookieandkate.com,cookincanuck.com,cookingclassy.com,creative-culinary.com,crunchycreamysweet.com,culinaryhill.com,damndelicious.net,extrapetite.com,feastingathome.com,feedmephoebe.com,feelgoodfoodie.net,foodfaithfitness.com,forkknifeswoon.com,foxeslovelemons.com,foxyfolksy.com,framedcooks.com,fromvalerieskitchen.com,galonamission.com,gearpatrol.com,godairyfree.org,happyveggiekitchen.com,healthyfitnessmeals.com,healthylittlefoodies.com,homemadehome.com,hoosierhomemade.com,howsweeteats.com,hummingbirdhigh.com,hummusapien.com,hungrypaprikas.com,ibreatheimhungry.com,iamhomesteader.com,inspiralized.com,isabeleats.com,jocooks.com,juliasalbum.com,juliescafebakery.com,justonecookbook.com,kimscravings.com,kirbiecravings.com,laurafuentes.com,littlehouseliving.com,littlesunnykitchen.com,makeitdairyfree.com,makingthymeforhealth.com,medievalists.net,melskitchencafe.com,mexicanfoodjournal.com,minimalistbaker.com,momsdish.com,mountainmamacooks.com,mybakingaddiction.com,mycolombianrecipes.com,natashaskitchen.com,neighborfoodblog.com,newlifeonahomestead.com,nocrumbsleft.net,nomnompaleo.com,nourishedbynic.com,ohsheglows.com,pancakerecipes.com,pinchofyum.com,platingsandpairings.com,premeditatedleftovers.com,pumpkinnspice.com,redcurrantbakery.com,runningonrealfood.com,runningtothekitchen.com,seededatthetable.com,shakentogetherlife.com,shugarysweets.com,simplywhisked.com,skinnytaste.com,studyfinds.org,stylegirlfriend.com,tasteandtellblog.com,the-girl-who-ate-everything.com,thebakermama.com,theendlessmeal.com,thefitchen.com,thefoodieaffair.com,themediterraneandish.com,thenewcamera.com,theplantbasedschool.com,therecipecritic.com,thewanderlustkitchen.com,thewoksoflife.com,umamigirl.com,unefemme.net,wellnessbykay.com,wellplated.com,whatjewwannaeat.com,workweeklunch.com,yourhomebasedmom.com##+js(no-xhr-if, ads.adthrive.com)
+a9733 1
+||html-load.com^$domain=lifewire.com|thoughtco.com
+d9792 1
+a9792 1
+acedarspoon.com,addapinch.com,amandascookin.com,aprettylifeinthesuburbs.com,averiecooks.com,awellstyledlife.com,backforseconds.com,bakedbree.com,bakedbyrachel.com,bakeitwithlove.com,barbarabakes.com,brighteyedbaker.com,browneyedbaker.com,butterbeready.com,cookieandkate.com,cookincanuck.com,cookingclassy.com,creative-culinary.com,crunchycreamysweet.com,culinaryhill.com,damndelicious.net,extrapetite.com,feastingathome.com,feedmephoebe.com,feelgoodfoodie.net,foodfaithfitness.com,forkknifeswoon.com,foxeslovelemons.com,foxyfolksy.com,framedcooks.com,fromvalerieskitchen.com,galonamission.com,gearpatrol.com,godairyfree.org,happyveggiekitchen.com,healthyfitnessmeals.com,healthylittlefoodies.com,homemadehome.com,hoosierhomemade.com,howsweeteats.com,hummingbirdhigh.com,hummusapien.com,hungrypaprikas.com,ibreatheimhungry.com,iamhomesteader.com,inspiralized.com,isabeleats.com,jocooks.com,juliasalbum.com,juliescafebakery.com,justonecookbook.com,kimscravings.com,kirbiecravings.com,laurafuentes.com,littlehouseliving.com,littlesunnykitchen.com,makeitdairyfree.com,makingthymeforhealth.com,medievalists.net,melskitchencafe.com,mexicanfoodjournal.com,minimalistbaker.com,momsdish.com,mountainmamacooks.com,mybakingaddiction.com,mycolombianrecipes.com,neighborfoodblog.com,newlifeonahomestead.com,nocrumbsleft.net,nomnompaleo.com,nourishedbynic.com,ohsheglows.com,pancakerecipes.com,pinchofyum.com,platingsandpairings.com,premeditatedleftovers.com,pumpkinnspice.com,redcurrantbakery.com,runningonrealfood.com,runningtothekitchen.com,seededatthetable.com,shakentogetherlife.com,shugarysweets.com,simplywhisked.com,skinnytaste.com,studyfinds.org,stylegirlfriend.com,tasteandtellblog.com,the-girl-who-ate-everything.com,thebakermama.com,theendlessmeal.com,thefitchen.com,thefoodieaffair.com,themediterraneandish.com,theplantbasedschool.com,therecipecritic.com,thewanderlustkitchen.com,thewoksoflife.com,umamigirl.com,unefemme.net,wellnessbykay.com,wellplated.com,whatjewwannaeat.com,workweeklunch.com,yourhomebasedmom.com##^script:has-text(html-load.com)
+d9818 1
+a9818 1
+acedarspoon.com,addapinch.com,amandascookin.com,aprettylifeinthesuburbs.com,averiecooks.com,awellstyledlife.com,backforseconds.com,bakedbree.com,bakedbyrachel.com,bakeitwithlove.com,barbarabakes.com,brighteyedbaker.com,browneyedbaker.com,butterbeready.com,cookieandkate.com,cookincanuck.com,cookingclassy.com,creative-culinary.com,crunchycreamysweet.com,culinaryhill.com,damndelicious.net,extrapetite.com,feastingathome.com,feedmephoebe.com,feelgoodfoodie.net,foodfaithfitness.com,forkknifeswoon.com,foxeslovelemons.com,foxyfolksy.com,framedcooks.com,fromvalerieskitchen.com,galonamission.com,gearpatrol.com,godairyfree.org,happyveggiekitchen.com,healthyfitnessmeals.com,healthylittlefoodies.com,homemadehome.com,hoosierhomemade.com,howsweeteats.com,hummingbirdhigh.com,hummusapien.com,hungrypaprikas.com,ibreatheimhungry.com,iamhomesteader.com,inspiralized.com,isabeleats.com,jocooks.com,juliasalbum.com,juliescafebakery.com,justonecookbook.com,kimscravings.com,kirbiecravings.com,laurafuentes.com,littlehouseliving.com,littlesunnykitchen.com,makeitdairyfree.com,makingthymeforhealth.com,medievalists.net,melskitchencafe.com,mexicanfoodjournal.com,minimalistbaker.com,momsdish.com,mountainmamacooks.com,mybakingaddiction.com,mycolombianrecipes.com,neighborfoodblog.com,newlifeonahomestead.com,nocrumbsleft.net,nomnompaleo.com,nourishedbynic.com,ohsheglows.com,pancakerecipes.com,pinchofyum.com,platingsandpairings.com,premeditatedleftovers.com,pumpkinnspice.com,redcurrantbakery.com,runningonrealfood.com,runningtothekitchen.com,seededatthetable.com,shakentogetherlife.com,shugarysweets.com,simplywhisked.com,skinnytaste.com,studyfinds.org,stylegirlfriend.com,tasteandtellblog.com,the-girl-who-ate-everything.com,thebakermama.com,theendlessmeal.com,thefitchen.com,thefoodieaffair.com,themediterraneandish.com,theplantbasedschool.com,therecipecritic.com,thewanderlustkitchen.com,thewoksoflife.com,umamigirl.com,unefemme.net,wellnessbykay.com,wellplated.com,whatjewwannaeat.com,workweeklunch.com,yourhomebasedmom.com##+js(rmnt, script, html-load.com)
+d11345 5
+d11378 14
+d11503 5
+d11617 8
+d11738 4
+d12130 2
+a12131 1
+7misr4day.com##+js(nano-sib)
+d12133 1
+diff name:ublock-privacy lines:3 checksum:7c9ed47cf6
+d4 1
+a4 1
+! Diff-Path: ../patches/2025.12.29.411.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:3 checksum:b3fd9e6124
+d4 1
+a4 1
+! Diff-Path: ../patches/2025.12.29.411.patch#ublock-quick-fixes
+diff name:ublock-unbreak lines:3 checksum:cc9b0a0862
+d4 1
+a4 1
+! Diff-Path: ../patches/2025.12.29.411.patch#ublock-unbreak
+diff name:easylist lines:358 checksum:0c930bf649
+d4 2
+a5 2
+! Last modified: Mon, 29 Dec 2025 04:37:37 +0000
+! Diff-Path: ../patches/2025.12.29.411.patch#easylist
+d783 1
+a783 1
+://ads.$~image,~xmlhttprequest,domain=~ads.8designers.com|~ads.ac.uk|~ads.adstream.com.ro|~ads.allegro.pl|~ads.am|~ads.amazon|~ads.apple.com|~ads.atmosphere.copernicus.eu|~ads.axon.ai|~ads.band|~ads.bestprints.biz|~ads.bikepump.com|~ads.brave.com|~ads.buscaempresas.co|~ads.business.bell.ca|~ads.cafebazaar.ir|~ads.chewy.com|~ads.colombiaonline.com|~ads.comeon.com|~ads.cvut.cz|~ads.doordash.com|~ads.dosocial.ge|~ads.dosocial.me|~ads.elevateplatform.co.uk|~ads.ferrarichat.com|~ads.finance|~ads.flytant.com|~ads.fund|~ads.google.cn|~ads.google.com|~ads.gree.net|~ads.gurkerl.at|~ads.harvard.edu|~ads.instacart.com|~ads.jiosaavn.com|~ads.kaipoke.biz|~ads.kifli.hu|~ads.knuspr.de|~ads.listonic.com|~ads.luarmor.net|~ads.magalu.com|~ads.mercadolibre.com.ar|~ads.mercadolibre.com.cl|~ads.mercadolibre.com.co|~ads.mercadolibre.com.ec|~ads.mercadolibre.com.mx|~ads.mercadolibre.com.pe|~ads.mercadolibre.com.ve|~ads.mercadolivre.com.br|~ads.mgid.com|~ads.microsoft.com|~ads.midwayusa.com|~ads.misskey.io|~ads.mobilebet.com|~ads.mojagazetka.com|~ads.msstate.edu|~ads.mst.dk|~ads.mt|~ads.naver.com|~ads.nc|~ads.nipr.ac.jp|~ads.olx.pl|~ads.palmettostatearmory.com|~ads.pinterest.com|~ads.realizeperformance.com|~ads.remix.es|~ads.rohlik.cz|~ads.rohlik.group|~ads.route.cc|~ads.safi-gmbh.ch|~ads.scotiabank.com|~ads.selfip.com|~ads.shopee.cn|~ads.shopee.co.th|~ads.shopee.com.br|~ads.shopee.com.mx|~ads.shopee.com.my|~ads.shopee.kr|~ads.shopee.ph|~ads.shopee.pl|~ads.shopee.sg|~ads.shopee.tw|~ads.shopee.vn|~ads.siriusxmmedia.com|~ads.smartnews.com|~ads.snapchat.com|~ads.socialtheater.com|~ads.sociogram.com|~ads.spotify.com|~ads.studyplus.co.jp|~ads.taboola.com|~ads.tiktok.com|~ads.tuver.ru|~ads.twitter.com|~ads.typepad.jp|~ads.umd.edu|~ads.us.tiktok.com|~ads.viksaffiliates.com|~ads.vk.com|~ads.vk.ru|~ads.watson.ch|~ads.wildberries.ru|~ads.x.com|~ads.yandex|~reempresa.org
+a15981 1
+||3f47f5f38f.com^
+a16198 1
+||5n4bjvymzzqjuj1zbv.rest^
+a16265 1
+||66tmxi1oh55vvlky78trp.rest^
+a16303 1
+||6e76b83826.com^
+a16443 1
+||819mng4kn6wybgg.cfd^
+a17607 1
+||aegiseswashrag.shop^
+a19519 1
+||avuiuqpnt.com^
+a19598 1
+||awkbkkqkqmvrb.top^
+a19867 1
+||baeizhplymdyc.site^
+a20090 1
+||baugragrik.com^
+a20751 1
+||birthedabbagang.cyou^
+a20912 1
+||blessedveiners.shop^
+a21013 1
+||bmccdtgzildra.site^
+a21876 1
+||butaigokakseele.net^
+a22117 1
+||caffledbubbies.cfd^
+a22143 1
+||cakcobqvrgklu.space^
+a22713 1
+||cfekcdra.xyz^
+a22919 1
+||chelateravisonfolded.cfd^
+a22991 1
+||chiphoudsapewo.net^
+a23102 1
+||chuterninglecurch.cyou^
+a23582 1
+||coahoapsoleeque.net^
+a24215 1
+||cpxqkvfckajqc.website^
+a24242 1
+||cqwlgnfoqgoyuu.com^
+a24383 1
+||crocutasnarlysicks.cyou^
+a24514 1
+||ctpydsbfmexni.com^
+a24628 1
+||curiouslyplanning.com^
+a24825 1
+||czuvfumygnjwp.space^
+a25151 1
+||dcapugcaiirxs.site^
+a25660 1
+||dhawbeslur.help^
+a25687 1
+||dhwuvovxbiehr.website^
+a25904 1
+||disduboleinbolide.cyou^
+a26381 1
+||dovishliegier.com^
+a26634 1
+||dsoayfumcsgfx.com^
+a27181 1
+||edctiqiehensj.space^
+a27438 1
+||eidmygko.com^
+a27602 1
+||ellachelideambages.cfd^
+a27767 1
+||enclosepd.rest^
+a29136 1
+||fggovwtouynec.site^
+a29688 1
+||fojsxocqfwqtt.com^
+a30013 1
+||frjbyduygjwbk.site^
+a30317 1
+||fwllilmwhfjfm.online^
+a30366 1
+||fybzuyvspginc.website^
+a30660 1
+||gbwjalwofivbq.website^
+a30769 1
+||gelongyabble.rest^
+a31065 1
+||gizpiwtamsi.com^
+a31183 1
+||glegnimtoat.net^
+a31513 1
+||gorcockgutta.help^
+a31599 1
+||gqiuhdighkawd.website^
+a31662 1
+||graniterelief.com^
+a32149 1
+||gvoojrsr.com^
+a32216 1
+||gxwquloigvxx.com^
+a32549 1
+||havstpqgejqbw.site^
+a32737 1
+||hegirahominy.help^
+a33072 1
+||hiverhanding.help^
+a33082 1
+||hj5zf1wc9l2ztyuf3hmqmn8et5ev1u.cfd^
+a33267 1
+||hokumbuzzer.click^
+a33291 1
+||homeredoside.shop^
+a33342 1
+||hoopoesplints.help^
+a33453 1
+||howledniching.rest^
+a33995 1
+||icpatvyalujns.space^
+a34245 1
+||ikindxuerylw.xyz^
+a35098 1
+||itcjggcc.com^
+a35180 1
+||iuwzyhoamhcqb.site^
+a35257 1
+||ixmfhpogypi.com^
+a35320 1
+||izkuyzehwunrc.website^
+a35471 1
+||jbvoejzmamlzj.top^
+a35757 1
+||jjjgqtzlslhzi.online^
+a36611 1
+||keixwuejevnfz.online^
+a36726 1
+||kgqevqwgejkrt.online^
+a36855 1
+||kjdwlyyvqxiguvo.com^
+a37171 1
+||kqbjvelltwkhn.online^
+a37212 1
+||krnoupbcxfp.com^
+a37428 1
+||ky41vgyy6hgwy5.rest^
+a37546 1
+||lajytnrioiaqy.website^
+a37740 1
+||lbylqerzmzqoq.top^
+a37978 1
+||letupselev.cfd^
+a37989 1
+||lewthshallop.cyou^
+a38039 1
+||lgtxrfqffcrex.site^
+a38517 1
+||lobeslaciest.cfd^
+a39084 1
+||lxsqsedbqps.com^
+a39182 1
+||macedonredial.click^
+a39761 1
+||megarafiddly.com^
+a40072 1
+||mimerachel.click^
+a40611 1
+||moskscystein.cfd^
+a41369 1
+||navcgjhobwoee.site^
+a42033 1
+||noisy-ad.pro^
+a42189 1
+||npbfbmogkiteg.website^
+a42339 1
+||ntobfyzxjkatt.space^
+a43312 1
+||onenessparmack.com^
+a43433 1
+||ootemmkdhgzoc.space^
+a43454 1
+||opagau.cfd^
+a43774 1
+||othozkodgnum.com^
+a43882 1
+||outgateprat.com^
+a44132 1
+||oyochdelkyabx.website^
+a44183 1
+||p3p5xrg2yu3zcytio7n.cfd^
+a44381 1
+||parianstrt.cfd^
+a45006 1
+||phoarbored.rest^
+a45180 1
+||pintcoenactthereto.cyou^
+a45247 1
+||pjcufnwglbiwm.online^
+a45932 1
+||prahusmuysca.cfd^
+a46985 1
+||qbbrgioouswdf.site^
+a47060 1
+||qdnrivjjfbbng.com^
+a47154 1
+||qgtlndbjewjxa.website^
+a47200 1
+||qif1cuocfo8mcvzcyuqkichu57cpe2m64yv.cfd^
+a47316 1
+||qmmxfbiercorx.space^
+a47323 1
+||qmrelvevwlzew.top^
+a47337 1
+||qnhjuumcqv.xyz^
+a47670 1
+||qvpmtnnrwjubd.website^
+a48290 1
+||redawnslae.rest^
+a48635 1
+||respectrunners.qpon^
+a48899 1
+||ricclvychqusy.website^
+a49268 1
+||rommackneotype.cyou^
+a49389 2
+||rowletlepta.help^
+||rowlrqwiretxwiw.com^
+a49474 1
+||rrypbcicshtso.online^
+a49478 1
+||rsapvqmdrgaoa.online^
+a49530 1
+||rthtajwmrnopm.space^
+a49611 1
+||ruinousgiglethankt.cyou^
+a49669 1
+||rutategpd.com^
+a49675 1
+||ruvvafhuwt.com^
+a49755 1
+||rxqpihgyhwahvs.xyz^
+a49885 1
+||sahhamices.qpon^
+a50812 1
+||shoartustoash.net^
+a51269 1
+||slipcottrel.shop^
+a51563 1
+||soldotensing.cyou^
+a51650 1
+||sorragaleod.click^
+a51741 1
+||spaviesforgift.help^
+a51936 1
+||spurlrivagesanion.cyou^
+a52057 1
+||stablesknive.shop^
+a52123 1
+||starredespouse.click^
+a52164 1
+||staunchtyken.cyou^
+a52829 1
+||sxiybtpod.com^
+a52941 1
+||tablafgqzrjuu.online^
+a53030 1
+||tangiemootsdecnet.cfd^
+a53038 1
+||tapaxfbh.com^
+a53124 1
+||tbakyjei.com^
+a53512 1
+||thibetsurculi.rest^
+a53835 1
+||tkpdrpqufaxuc.com^
+a53885 1
+||tmjuwtbhvodzk.online^
+a54618 1
+||tttrehcqzoguv.online^
+a55018 1
+||uecdaxndsx.com^
+a55052 1
+||uffyltfpfi.com^
+a55188 1
+||ukacrggneirtnm.com^
+a55553 1
+||unrigscsc.com^
+a55701 1
+||updiveglyptal.rest^
+a55711 1
+||upgirtaeolis.click^
+a55842 1
+||urssjrxrosknm.website^
+a55938 1
+||utopiasiodines.click^
+a56091 1
+||v4y936wfjzg38w3p.rest^
+a56138 1
+||vairsspiff.qpon^
+a56193 1
+||vaprimate.cfd^
+a56550 1
+||vgutxnvrwydey.website^
+a56668 1
+||vijlouowdmula.online^
+a56839 1
+||vlzbstbjzcamf.website^
+a56917 1
+||volaticlanugos.com^
+a57009 1
+||vqoqlebqqzvyq.top^
+a57014 1
+||vqrwdwrmxbelz.website^
+a57148 1
+||vvnbeszocfcfs.site^
+a57386 1
+||warlike-state.com^
+a57404 1
+||warucwkpahinb.space^
+a57750 1
+||wfrglsvwclwqp.space^
+a58152 1
+||wjopvkcozzxif.online^
+a58499 1
+||wqnymuhn8vn6yp69142un.rest^
+a58529 1
+||wretchskim.com^
+a59063 1
+||xlqonmpyuwmxe.com^
+a59856 1
+||ymycrjhhu.xyz^
+a60134 1
+||ywrecltfwkwqx.com^
+a60148 1
+||yxekbocgivluj.com^
+a60211 1
+||z6q5gphupkjxjemg9l66p.cfd^
+a60319 1
+||zdgxlgetrquwwu.com^
+a60446 1
+||zgyrvygvthohy.site^
+a60838 1
+||zvbqvqbrwbale.top^
+a60908 1
+||zyiaxyfrbehub.space^
+d72770 1
+a72770 1
+12news.com,9news.com,9to5google.com,9to5mac.com,aad.org,advfn.com,all3dp.com,allaboutcookies.org,allnovel.net,amny.com,athleticbusiness.com,audiokarma.org,beeradvocate.com,beliefnet.com,bizjournals.com,biznews.com,bolavip.com,bonappetit.com,breakingac.com,britishheritage.com,businessinsider.com,capemaynjdaily.com,cbs8.com,cc.com,ccjdigital.com,centralbucksnews.com,dailytrust.com,delish.com,downbeach.com,dutchnews.nl,ecr.co.za,electrek.co,engineeringnews.co.za,equipmentworld.com,euromaidanpress.com,fastcompany.com,fishermap.org,footyheadlines.com,fox10phoenix.com,fox13news.com,fox26houston.com,fox29.com,fox2detroit.com,fox32chicago.com,fox35orlando.com,fox4news.com,fox5atlanta.com,fox5dc.com,fox5ny.com,fox7austin.com,fox9.com,foxbusiness.com,foxla.com,foxnews.com,funkidslive.com,gfinityesports.com,globalspec.com,gmanetwork.com,grammarbook.com,greatbritishchefs.com,greatitalianchefs.com,hbr.org,highdefdigest.com,historynet.com,horshamnow.com,howstuffworks.com,huffpost.com,ibtimes.sg,inc.com,insidehook.com,intouchweekly.com,irishcentral.com,karanpc.com,khou.com,koat.com,ktvu.com,lifeandstylemag.com,longislandpress.com,macstories.net,mail.com,memuplay.com,metro.us,metrophiladelphia.com,minecraftforum.net,miningweekly.com,mixed-news.com,mobilesyrup.com,modernhealthcare.com,namemc.com,nbcnews.com,newrepublic.com,northpennnow.com,nzherald.co.nz,ocnjdaily.com,oneesports.gg,opb.org,outkick.com,papermag.com,perkvalleynow.com,phillydaily.com,physiology.org,pixiv.net,podcastaddict.com,punchng.com,qns.com,realsport101.com,reason.com,refinery29.com,roadandtrack.com,scroll.in,seaislenews.com,seattletimes.com,songkick.com,sportskeeda.com,storyboard18.com,thedailybeast.com,thelocal.at,thelocal.ch,thelocal.de,thelocal.dk,thelocal.es,thelocal.fr,thelocal.it,thelocal.no,thelocal.se,thenationonlineng.net,thenewstack.io,thepost.co.nz,thetimes.com,tmz.com,toofab.com,uploadvr.com,usmagazine.com,vanguardngr.com,wildtangent.com,willowgrovenow.com,wired.com,wogx.com,worldsoccertalk.com,wral.com##.ad-container
+d74694 1
+a74694 1
+stuff.co.nz,thepost.co.nz##.horizontal-ad-slot
+diff name:easyprivacy lines:8 checksum:279196b1a3
+d4 2
+a5 2
+! Last modified: Sun, 28 Dec 2025 18:55:57 +0000
+! Diff-Path: ../patches/2025.12.29.411.patch#easyprivacy
+a7509 1
+||littlesun.net^
+a7518 1
+||logicalminds.net^
+3.YãY×      iR(ŸiR( I ¾‰iR(    C    ~FETCH,:https://ublockorigin.pages.dev/patches/2025.12.28.929.patch strongly-framed 1 security-info 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 request-method GET request-accept-encoding gzip, deflate, br, zstd response-head HTTP/2 200 
+date: Mon, 29 Dec 2025 07:07:12 GMT
+content-type: application/octet-stream
+content-length: 21259
+access-control-allow-origin: *
+cache-control: public, max-age=0, must-revalidate
+etag: "c2e303e0088dff6674e5222bd6fbc31f"
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+vary: accept-encoding
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=5xS8DFTtnH1n9f2QYVhIEIV4unFoq%2Bu4OtYFg%2FU5A6O6PooBEd44B9uCMVP4goi7XcBf3IcPTthWuxb3FZq%2FpOWl%2BAMSd8VzS0FGauH514I4KEzV"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+server: cloudflare
+cf-ray: 9b57758839283e90-HNL
+alt-svc: h3=":443"; ma=86400
+X-Firefox-Spdy: h2
+ original-response-headers date: Mon, 29 Dec 2025 07:07:12 GMT
+content-type: application/octet-stream
+content-length: 21259
+access-control-allow-origin: *
+cache-control: public, max-age=0, must-revalidate
+etag: "c2e303e0088dff6674e5222bd6fbc31f"
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+vary: accept-encoding
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=5xS8DFTtnH1n9f2QYVhIEIV4unFoq%2Bu4OtYFg%2FU5A6O6PooBEd44B9uCMVP4goi7XcBf3IcPTthWuxb3FZq%2FpOWl%2BAMSd8VzS0FGauH514I4KEzV"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+server: cloudflare
+cf-ray: 9b57758839283e90-HNL
+alt-svc: h3=":443"; ma=86400
+X-Firefox-Spdy: h2
+ ctid 1 net-response-time-onstart 210 net-response-time-onstop 213   S

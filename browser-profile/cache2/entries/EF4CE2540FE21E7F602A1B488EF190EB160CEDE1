@@ -1,0 +1,463 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // UI Elements
+    const splashScreen = document.getElementById('splash-screen');
+    const splashProgressFill = document.getElementById('splash-progress-fill');
+    const splashPercent = document.getElementById('splash-percent');
+
+    const appContainer = document.getElementById('app-container');
+    const itemGrid = document.getElementById('item-grid');
+    const currentFolderTitle = document.getElementById('current-folder-title');
+    const breadcrumbs = document.getElementById('breadcrumbs');
+    const backBtn = document.getElementById('back-btn');
+    const settingsBtn = document.getElementById('settings-btn');
+    const exitBtn = document.getElementById('exit-btn');
+    const youtubeBtn = document.getElementById('youtube-btn');
+    const appsSection = document.getElementById('apps-section');
+
+    const playerOverlay = document.getElementById('player-overlay');
+    const closePlayerBtn = document.getElementById('close-player');
+
+    const autoplayOverlay = document.getElementById('autoplay-overlay');
+    const nextEpisodeTitle = document.getElementById('next-episode-title');
+    const countdownNumber = document.getElementById('countdown-number');
+    const countdownProgress = document.getElementById('countdown-progress');
+    const cancelAutoplayBtn = document.getElementById('autoplay-cancel');
+    const playNowBtn = document.getElementById('autoplay-play-now');
+
+    const settingsOverlay = document.getElementById('settings-overlay');
+    const closeSettingsBtn = document.getElementById('close-settings');
+    const checkSubtitles = document.getElementById('check-subtitles');
+    const checkAutostart = document.getElementById('check-autostart');
+    const checkMusic = document.getElementById('check-music');
+
+    const catGifWindow = document.getElementById('cat-gif-window');
+    const currentCatGif = document.getElementById('current-cat-gif');
+    const splashCatGif = document.getElementById('splash-cat-gif');
+
+    const bgMusic = document.getElementById('bg-music');
+    const sndNav = document.getElementById('snd-nav');
+    const sndSelect = document.getElementById('snd-select');
+    const sndBack = document.getElementById('snd-back');
+
+    function playSound(audio) {
+        if (!audio) return;
+        audio.currentTime = 0;
+        audio.play().catch(() => { });
+    }
+
+    // State
+    let currentPath = '';
+    let currentPlaylist = [];
+    let gridItems = [];
+    let focusIndex = 0; // -1 = settings, -2 = exit
+    let settingsFocusIndex = 0;
+    let isSettingsOpen = false;
+    let userSettings = { subtitles_enabled: true, autostart: true, music_enabled: true };
+
+    let isVLCActive = false;
+    let pollInterval = null;
+    let countdownInterval = null;
+    let musicStarted = false;
+    let catGifs = [];
+    let currentGifIndex = 0;
+    let gifInterval = null;
+
+    // --- Settings / Music / Exit ---
+
+    function loadSettings() {
+        return fetch('/api/settings').then(res => res.json()).then(data => {
+            userSettings = data;
+            updateSettingsUI();
+            syncMusic();
+        });
+    }
+
+    function updateSettingsUI() {
+        checkSubtitles.classList.toggle('checked', userSettings.subtitles_enabled);
+        checkAutostart.classList.toggle('checked', userSettings.autostart);
+        checkMusic.classList.toggle('checked', userSettings.music_enabled);
+    }
+
+    function syncMusic() {
+        if (userSettings.music_enabled && !isVLCActive && !isSettingsOpen) {
+            if (musicStarted) bgMusic.play().catch(() => { });
+        } else bgMusic.pause();
+    }
+
+    function startMusicInteraction() {
+        if (!musicStarted && userSettings.music_enabled) {
+            musicStarted = true;
+            bgMusic.play().catch(() => { });
+        }
+    }
+
+    function saveSettings() {
+        fetch('/api/settings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(userSettings) });
+        syncMusic();
+    }
+
+    function toggleSetting(key) {
+        userSettings[key] = !userSettings[key];
+        updateSettingsUI();
+        saveSettings();
+    }
+
+    function exitToDesktop() {
+        if (confirm("Are you sure you want to exit to desktop?")) {
+            fetch('/api/exit').then(() => {
+                document.body.innerHTML = '<div style="background:black; color:white; height:100vh; display:flex; align-items:center; justify-content:center; font-family:sans-serif;">Exiting...</div>';
+            });
+        }
+    }
+
+    // --- Cat GIFs ---
+
+    function fetchGifs() {
+        return fetch('/api/gifs').then(res => res.json()).then(data => {
+            catGifs = data;
+            if (catGifs.length > 0) {
+                startGifRotation();
+            }
+        });
+    }
+
+    function startGifRotation() {
+        if (gifInterval) clearTimeout(gifInterval);
+        updateGif();
+    }
+
+    function updateGif() {
+        if (catGifs.length === 0) return;
+
+        const gif = catGifs[currentGifIndex];
+        const url = typeof gif === 'string' ? gif : gif.url;
+        const duration = typeof gif === 'string' ? 3 : (gif.duration || 3);
+
+        if (currentCatGif) currentCatGif.src = url;
+        if (splashCatGif) splashCatGif.src = url;
+
+        // Calculate delay: max(3000ms, duration * 1000)
+        const delay = Math.max(3000, duration * 1000);
+
+        currentGifIndex = (currentGifIndex + 1) % catGifs.length;
+        gifInterval = setTimeout(updateGif, delay);
+    }
+
+    // --- Navigation ---
+
+    function navigateTo(path) {
+        currentPath = path;
+        fetchItems(path);
+        updateBreadcrumbs(path);
+        if (path === '') appsSection.classList.remove('hidden');
+        else appsSection.classList.add('hidden');
+    }
+
+    function fetchItems(path) {
+        itemGrid.innerHTML = '<div class="loader-container">...</div>';
+        fetch(`/api/list?path=${encodeURIComponent(path)}`).then(res => res.json()).then(data => {
+            currentPlaylist = data.videos;
+            renderItems(data);
+        });
+    }
+
+    function updateBreadcrumbs(path) {
+        breadcrumbs.innerHTML = '';
+        const parts = path.split('/').filter(p => p);
+        const home = document.createElement('span'); home.className = 'breadcrumb-item'; home.textContent = 'Home'; home.onclick = () => navigateTo('');
+        breadcrumbs.appendChild(home);
+        let cumulative = '';
+        parts.forEach(part => {
+            cumulative += (cumulative ? '/' : '') + part;
+            const item = document.createElement('span'); item.className = 'breadcrumb-item'; item.textContent = part;
+            const thisP = cumulative; item.onclick = () => navigateTo(thisP);
+            breadcrumbs.appendChild(item);
+        });
+        if (path) { backBtn.classList.remove('hidden'); backBtn.onclick = () => goBack(); } else backBtn.classList.add('hidden');
+        currentFolderTitle.textContent = parts.length > 0 ? parts[parts.length - 1] : 'All Shows';
+    }
+
+    function goBack() {
+        playSound(sndBack);
+        const parts = currentPath.split('/').filter(p => p);
+        navigateTo(parts.slice(0, -1).join('/'));
+    }
+
+    function renderItems(data) {
+        itemGrid.innerHTML = ''; gridItems = []; focusIndex = 0;
+        data.folders.forEach(f => {
+            const card = document.createElement('div'); card.className = 'card';
+            let folderContent;
+            if (f.previews && f.previews.length > 0) {
+                const collageHtml = f.previews.map(p => `<img src="${p}" class="collage-img">`).join('');
+                folderContent = `<div class="folder-collage collage-${f.previews.length}">${collageHtml}</div>`;
+            } else {
+                folderContent = `<div class="folder-icon"><span class="material-symbols-rounded" style="font-size: 80px; color: #f39c12;">folder</span></div>`;
+            }
+            card.innerHTML = `${folderContent}<div class="card-info">${f.name}</div>`;
+            card.onclick = () => { playSound(sndSelect); navigateTo(f.path); };
+            itemGrid.appendChild(card); gridItems.push({ el: card, action: () => navigateTo(f.path) });
+        });
+        data.videos.forEach((v, idx) => {
+            const card = document.createElement('div'); card.className = 'card';
+            const thumb = v.thumbnail ? `<img src="${v.thumbnail}" class="video-thumbnail">` : '<div class="folder-icon"><span class="material-symbols-rounded">movie</span></div>';
+            card.innerHTML = `${thumb}<div class="card-info">${v.title}</div>`;
+            card.onclick = () => { playSound(sndSelect); playVideoFromPlaylist(idx); };
+            itemGrid.appendChild(card); gridItems.push({ el: card, action: () => playVideoFromPlaylist(idx) });
+        });
+        if (gridItems.length > 0) updateFocus();
+    }
+
+    function updateFocus() {
+        gridItems.forEach(item => item.el.classList.remove('focused'));
+        settingsBtn.classList.remove('focused');
+        exitBtn.classList.remove('focused');
+        youtubeBtn.classList.remove('focused');
+
+        if (focusIndex === -1) settingsBtn.classList.add('focused');
+        else if (focusIndex === -2) exitBtn.classList.add('focused');
+        else if (focusIndex === -3) {
+            youtubeBtn.classList.add('focused');
+            youtubeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        else if (gridItems[focusIndex]) {
+            gridItems[focusIndex].el.classList.add('focused');
+            gridItems[focusIndex].el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    // --- Playback ---
+
+    let playlistCurrentIndex = -1;
+    function playVideoFromPlaylist(idx) { playlistCurrentIndex = idx; playVideo(currentPlaylist[idx]); }
+
+    function playVideo(video) {
+        playerOverlay.classList.remove('hidden');
+        autoplayOverlay.classList.add('hidden');
+        appContainer.classList.add('hidden');
+        bgMusic.pause();
+        clearInterval(countdownInterval);
+        fetch(`/api/play?path=${encodeURIComponent(video.rel_path)}`).then(() => { isVLCActive = true; startVLCWatcher(); });
+    }
+
+    function startVLCWatcher() {
+        if (pollInterval) clearInterval(pollInterval);
+        pollInterval = setInterval(() => {
+            fetch('/api/status').then(res => res.json()).then(data => {
+                if (!data.vlc_active && isVLCActive) { isVLCActive = false; clearInterval(pollInterval); onPlaybackFinished(); }
+            });
+        }, 1000);
+    }
+
+    function onPlaybackFinished() {
+        appContainer.classList.remove('hidden');
+        const nextIdx = playlistCurrentIndex + 1;
+        if (nextIdx < currentPlaylist.length) startCountdown(currentPlaylist[nextIdx], nextIdx);
+        else { playerOverlay.classList.add('hidden'); syncMusic(); updateFocus(); }
+    }
+
+    function startCountdown(nextVideo, nextIdx) {
+        playerOverlay.classList.add('hidden');
+        autoplayOverlay.classList.remove('hidden');
+        nextEpisodeTitle.textContent = nextVideo.title;
+
+        let timeLeft = 10;
+        let countBtnFocus = 0;
+        const btns = [playNowBtn, cancelAutoplayBtn];
+
+        const updBtn = () => {
+            btns.forEach((b, i) => b.classList.toggle('focused', i === countBtnFocus));
+        };
+        updBtn();
+
+        window.onkeydown = (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                playSound(sndNav);
+                countBtnFocus = 1 - countBtnFocus;
+                updBtn();
+            }
+            else if (e.key === 'Enter') {
+                playSound(sndSelect);
+                if (countBtnFocus === 0) playVideoFromPlaylist(nextIdx); else cancelAutoplay();
+            }
+            else if (e.key === 'Escape') { playSound(sndBack); cancelAutoplay(); }
+        };
+
+        if (countdownInterval) clearInterval(countdownInterval);
+
+        const startTime = Date.now();
+        const duration = 10000; // 10 seconds
+
+        countdownInterval = setInterval(() => {
+            const elapsed = Date.now() - startTime;
+            const remaining = Math.max(0, duration - elapsed);
+            const seconds = Math.ceil(remaining / 1000);
+
+            countdownNumber.textContent = seconds;
+            // Circle circumference is 283
+            const offset = (elapsed / duration) * 283;
+            countdownProgress.style.strokeDashoffset = offset;
+
+            if (elapsed >= duration) {
+                clearInterval(countdownInterval);
+                playVideoFromPlaylist(nextIdx);
+            }
+        }, 50); // 50ms for smooth 20fps animation
+
+        playNowBtn.onclick = () => { clearInterval(countdownInterval); playVideoFromPlaylist(nextIdx); };
+    }
+
+    function cancelAutoplay() {
+        clearInterval(countdownInterval); autoplayOverlay.classList.add('hidden');
+        appContainer.classList.remove('hidden'); syncMusic(); resetKeyboardNav(); fetch('/api/stop');
+    }
+
+    function closeOverlay() {
+        playerOverlay.classList.add('hidden'); appContainer.classList.remove('hidden');
+        syncMusic(); resetKeyboardNav(); fetch('/api/stop');
+    }
+
+    // --- Settings Overlay Flow ---
+
+    function openSettings() {
+        isSettingsOpen = true; settingsOverlay.classList.remove('hidden');
+        bgMusic.pause(); settingsFocusIndex = 0; updateSettingsFocus();
+    }
+
+    function closeSettings() {
+        isSettingsOpen = false; settingsOverlay.classList.add('hidden');
+        syncMusic(); resetKeyboardNav();
+    }
+
+    function updateSettingsFocus() {
+        const items = document.querySelectorAll('.setting-item');
+        items.forEach((item, idx) => item.classList.toggle('focused', idx === settingsFocusIndex));
+        closeSettingsBtn.classList.toggle('focused', settingsFocusIndex === items.length);
+    }
+
+    function handleSettingsKeyDown(e) {
+        const settingsCount = document.querySelectorAll('.setting-item').length;
+        if (e.key.startsWith('Arrow')) playSound(sndNav);
+        switch (e.key) {
+            case 'ArrowDown': if (settingsFocusIndex < settingsCount) settingsFocusIndex++; break;
+            case 'ArrowUp': if (settingsFocusIndex > 0) settingsFocusIndex--; break;
+            case 'Enter':
+                playSound(sndSelect);
+                if (settingsFocusIndex === 0) toggleSetting('subtitles_enabled');
+                else if (settingsFocusIndex === 1) toggleSetting('autostart');
+                else if (settingsFocusIndex === 2) toggleSetting('music_enabled');
+                else if (settingsFocusIndex === settingsCount) closeSettings();
+                break;
+            case 'Escape':
+                playSound(sndBack);
+                closeSettings();
+                break;
+        }
+        updateSettingsFocus();
+    }
+
+    // --- Global Keyboard ---
+
+    function resetKeyboardNav() { window.onkeydown = handleGlobalKeyDown; updateFocus(); }
+
+    function handleGlobalKeyDown(e) {
+        startMusicInteraction();
+        if (isSettingsOpen) { handleSettingsKeyDown(e); return; }
+        if (!appContainer.classList.contains('hidden')) {
+            if (e.key.startsWith('Arrow')) playSound(sndNav);
+            const columns = getGridColumns();
+            switch (e.key) {
+                case 'ArrowRight':
+                    if (focusIndex === -2) focusIndex = -1; // Exit -> Settings
+                    else if (focusIndex < gridItems.length - 1) focusIndex++;
+                    break;
+                case 'ArrowLeft':
+                    if (focusIndex === -1) focusIndex = -2; // Settings -> Exit
+                    else if (focusIndex > 0) focusIndex--;
+                    break;
+                case 'ArrowDown':
+                    if (focusIndex < 0) focusIndex = 0;
+                    else if (focusIndex + columns < gridItems.length) focusIndex += columns;
+                    else if (currentPath === '') focusIndex = -3; // To YouTube
+                    else focusIndex = gridItems.length - 1;
+                    break;
+                case 'ArrowUp':
+                    if (focusIndex === -3) focusIndex = gridItems.length - 1;
+                    else if (focusIndex >= 0 && focusIndex < columns) focusIndex = -2; // To Exit by default
+                    else if (focusIndex - columns >= 0) focusIndex -= columns;
+                    break;
+                case 'Enter':
+                    playSound(sndSelect);
+                    if (focusIndex === -1) openSettings();
+                    else if (focusIndex === -2) exitToDesktop();
+                    else if (focusIndex === -3) launchYouTube();
+                    else if (gridItems[focusIndex]) gridItems[focusIndex].action();
+                    break;
+                case 'Escape': playSound(sndBack); if (currentPath) goBack(); break;
+            }
+            updateFocus();
+        } else if (!playerOverlay.classList.contains('hidden')) {
+            if (e.key === 'Escape' || e.key === 'Enter') {
+                if (e.key === 'Escape') playSound(sndBack); else playSound(sndSelect);
+                closeOverlay();
+            }
+        }
+    }
+
+    function getGridColumns() {
+        const style = window.getComputedStyle(itemGrid);
+        return style.getPropertyValue('grid-template-columns').split(' ').length;
+    }
+
+    // --- Init ---
+
+    function pollInitialStatus() {
+        fetch('/api/status').then(res => res.json()).then(data => {
+            const p = data.total > 0 ? Math.round((data.completed / data.total) * 100) : 0;
+            splashProgressFill.style.width = p + '%';
+            if (splashPercent) splashPercent.textContent = p + '%';
+
+            if (data.ready) {
+                clearInterval(statusInterval);
+                loadSettings().then(() => {
+                    setTimeout(() => {
+                        splashScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            splashScreen.classList.add('hidden'); appContainer.classList.remove('hidden');
+                            navigateTo(''); resetKeyboardNav();
+                        }, 800);
+                    }, 500);
+                });
+            }
+        });
+    }
+
+    function launchYouTube() {
+        fetch('/api/youtube');
+    }
+
+    closePlayerBtn.onclick = () => { playSound(sndBack); closeOverlay(); };
+    cancelAutoplayBtn.onclick = () => { playSound(sndBack); cancelAutoplay(); };
+    settingsBtn.onclick = () => { playSound(sndSelect); openSettings(); };
+    closeSettingsBtn.onclick = () => { playSound(sndBack); closeSettings(); };
+    exitBtn.onclick = () => { playSound(sndSelect); exitToDesktop(); };
+    youtubeBtn.onclick = () => { playSound(sndSelect); launchYouTube(); };
+
+    document.addEventListener('click', startMusicInteraction);
+    document.addEventListener('keydown', startMusicInteraction);
+
+    fetchGifs();
+    statusInterval = setInterval(pollInitialStatus, 1000);
+});
+ÐJùçÞ      iRBsiRBsIBiRtG   C    O^partitionKey=%28http%2C127.0.0.1%29,:http://127.0.0.1:8000/app.js strongly-framed 1 request-method GET response-head HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.13.5
+Date: Mon, 29 Dec 2025 08:45:22 GMT
+Content-type: text/javascript
+Content-Length: 18877
+Last-Modified: Sat, 27 Dec 2025 19:19:07 GMT
+ original-response-headers Server: SimpleHTTP/0.6 Python/3.13.5
+Date: Mon, 29 Dec 2025 08:45:22 GMT
+Content-type: text/javascript
+Content-Length: 18877
+Last-Modified: Sat, 27 Dec 2025 19:19:07 GMT
+ ctid 2 net-response-time-onstart 18 net-response-time-onstop 26   I½

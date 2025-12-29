@@ -1,0 +1,58 @@
+Server with Exit Control running on port 8000
+127.0.0.1 - - [28/Dec/2025 22:57:17] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:23] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:23] "GET /app.js HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 45276)
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/server.py", line 672, in __init__
+    super().__init__(*args, **kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/http/server.py", line 436, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/http/server.py", line 424, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "/home/rpi/.gemini/antigravity/scratch/media-center/server.py", line 292, in do_GET
+    super().do_GET()
+    ~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/http/server.py", line 679, in do_GET
+    self.copyfile(f, self.wfile)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/server.py", line 881, in copyfile
+    shutil.copyfileobj(source, outputfile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/shutil.py", line 204, in copyfileobj
+    fdst_write(buf)
+    ~~~~~~~~~~^^^^^
+  File "/usr/lib/python3.13/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+127.0.0.1 - - [28/Dec/2025 22:57:23] "GET /api/gifs HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:23] code 404, message File not found
+127.0.0.1 - - [28/Dec/2025 22:57:24] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [28/Dec/2025 22:57:24] "GET /api/status HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:24] "GET /api/settings HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:25] "GET /api/list?path= HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:25] "GET /static/thumbnails/669203bffcb790fe81f5a366ad3f54bd.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:25] "GET /static/thumbnails/11bba53706f4a7a8f42f3cfda53f3f57.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:25] "GET /static/thumbnails/78589c35698a7ad9a76a29c1785a0273.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:25] "GET /static/thumbnails/89621138a27610382c11f4dc15badea1.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:25] "GET /static/thumbnails/1b0739137f4c16abe3f8d1d6ffeb9b14.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:25] "GET /static/thumbnails/5389e95a5bf20044ec110596890ebeff.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:25] "GET /static/thumbnails/fc64eb77cc0261f7d3a8c8a09dda7618.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:26] "GET /static/thumbnails/69162d7126e305b6d7581a4dd1449d61.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:57:26] "GET /static/thumbnails/8210abc5eb333e5557a011f0843e4270.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [28/Dec/2025 22:58:28] "GET /api/exit HTTP/1.1" 200 -
