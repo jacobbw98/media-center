@@ -1,5 +1,5 @@
 this is a program I made for me and my fiancé to watch movie files in a format similar to any streaming service 
-it works nativity on rasberry pi 5 Trixie as that's where I devolved it
+it works nativity on rasberry pi 5 Trixie as that's where I developed it
 I do not know if it works on any other os
 
 requirements 
