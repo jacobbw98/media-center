@@ -11,6 +11,11 @@ import random
 import webbrowser
 import hashlib
 from pathlib import Path
+import re
+
+def natural_sort_key(s):
+    """Sort strings containing numbers in natural order (e.g., Episode 2 before Episode 10)"""
+    return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', s)]
 
 PORT = 8000
 VIDEO_DIR = os.path.expanduser("~/Videos")
@@ -145,6 +150,9 @@ class CacheManager:
                         'thumbnail': f"/static/thumbnails/{vid_id}.jpg"
                     })
             
+            # Sort videos naturally so Episode 2 comes before Episode 10
+            videos.sort(key=lambda v: natural_sort_key(v['title']))
+            
             structure[rel_root] = {
                 'videos': videos,
                 'folders': sorted([d for d in dirs if not d.startswith('.')]),
@@ -261,7 +269,7 @@ class MediaRequestHandler(http.server.SimpleHTTPRequestHandler):
                     full_folder_rel = os.path.join(rel_path, folder_name).strip('/')
                     folder_info = cache_mgr.cache.get("structure", {}).get(full_folder_rel, {})
                     items['folders'].append({'name': folder_name, 'path': full_folder_rel, 'previews': folder_info.get('previews', [])})
-                items['videos'] = cached_data['videos']
+                items['videos'] = sorted(cached_data['videos'], key=lambda v: natural_sort_key(v['title']))
                 for v in items['videos']:
                     if not os.path.exists(os.path.join(BASE_DIR, v['thumbnail'].lstrip('/'))): v['thumbnail'] = None
             else:
@@ -269,7 +277,7 @@ class MediaRequestHandler(http.server.SimpleHTTPRequestHandler):
                 if not current_dir.startswith(os.path.abspath(VIDEO_DIR)): self.send_error(403); return
                 items = {'folders': [], 'videos': []}
                 if os.path.exists(current_dir):
-                    for entry in sorted(os.listdir(current_dir)):
+                    for entry in sorted(os.listdir(current_dir), key=natural_sort_key):
                         full_p = os.path.join(current_dir, entry); item_rel_p = os.path.relpath(full_p, VIDEO_DIR)
                         if os.path.isdir(full_p) and not entry.startswith('.'):
                             items['folders'].append({'name': entry, 'path': item_rel_p, 'previews': []})
